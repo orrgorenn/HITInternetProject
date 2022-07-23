@@ -51,6 +51,9 @@ public class Server {
     // Serving clients functionality - handle all tasks and comm. with the client
     public void serveClients(IHandler handler) {
         this.requestHandler = handler;
+        /**
+         * As requested the ServerSocket accept method is wrapper in a Thread to handle multiple clients
+         */
         new Thread(() -> {
             this.threadPool = new ThreadPoolExecutor(3, 5, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 
