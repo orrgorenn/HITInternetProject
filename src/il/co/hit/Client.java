@@ -37,7 +37,7 @@ public class Client {
 	 * Print to the console all available tasks
 	 */
 	private static void displayTasks() {
-		System.out.println("Welcome to Internet Programming final project, made by Orr.G and Or.S.");
+		System.out.println("Welcome to Internet Programming final project, made by Orr.G, Anna P. and Or.S.");
 		System.out.println("Please choose your desired task:");
 		for(int i = 0; i < tasks.length; i++) {
 			System.out.println("(" + (i + 1) + ") - " + tasks[i]);
