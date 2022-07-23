@@ -55,10 +55,20 @@ public class Client {
     		{1, 1, 0},
     };
     
+    /**
+     * 
+     {1, 0, 0, 1, 1}, - 2 BattleShips
+	 {1, 0, 0, 1, 1},
+	 {1, 0, 0, 1, 1},
+	 * 
+     {1, 1, 0, 1, 1}, - 3 BattleShips
+     {0, 0, 0, 1, 1},
+     {1, 1, 0, 1, 1},
+     */
     private static int[][] taskThreeMatrix = {
-    		{1, 0, 0},
-    		{1, 0, 1},
-    		{0, 0, 1},
+    		{1, 1, 0, 1, 1},
+    	    {0, 0, 0, 1, 1},
+    	    {1, 1, 0, 1, 1},
     };
     
     private static int[][] taskFourMatrix = {
@@ -81,13 +91,12 @@ public class Client {
             System.out.println("Invalid, the options are: 0 - " + (m.getMatrix().length - 1) + ", Please enter correct value:");
             row = in.nextInt();
         }
-        System.out.println("Please enter column for Index");
+        System.out.println("Choose a column in matrix:");
         int col = in.nextInt();
         while(!(col >= 0 && col < m.getMatrix()[0].length)){
         	System.out.println("Invalid, the options are: 0 - " + (m.getMatrix()[0].length - 1) + ", Please enter correct value:");
             col = in.nextInt();
         }
-        in.close();
         return new Index(row , col);
     }
     
@@ -104,19 +113,33 @@ public class Client {
     	System.out.println("The chosen task is: " + tasks[task - 1]);
     	output.writeObject(String.valueOf(task));
 		output.writeObject(allTasks[task - 1]);
-		// ^ General Top
 		
-		/* Matrix matrix = new Matrix(allTasks[task - 1]);
-        System.out.println("Start index (r, c):");
-        Index startIndex = getIndexFromInput(matrix);
-        System.out.println("Destination index (r, c):");
-        Index endIndex = getIndexFromInput(matrix); 
+		switch(task) {
+			case 1:
+				List<HashSet<Index>> answer = new ArrayList<>((List<HashSet<Index>>) input.readObject()) {};
+				System.out.println("Answer: \n" + answer);
+			case 2:
+				Matrix matrix = new Matrix(allTasks[task - 1]);
+		        System.out.println("Choose starting index (r, c):");
+		        Index startIndex = getIndexFromInput(matrix);
+		        System.out.println("Choose destination index (r, c):");
+		        Index endIndex = getIndexFromInput(matrix); 
+		        
+		        output.writeObject(startIndex);
+		        output.writeObject(endIndex);
+		        
+		        List<List<Node<Index>>> minPaths = new ArrayList<>((List<List<Node<Index>>>) input.readObject());
+		        
+		        System.out.println("Answer: \n" + minPaths);
+		        break;
+			case 3:
+				int size = (int) input.readObject();
+		        System.out.println("Answer: \n" + size);
+		        break;
+			default:
+				break;
+		}
         
-        output.writeObject(startIndex);
-        output.writeObject(endIndex); */
-        
-		List<HashSet<Index>> answer = new ArrayList<>((List<HashSet<Index>>) input.readObject()) {};
-		System.out.println("Answer: \n" + answer);
 		System.out.println("0 - to stop | 9 - show task options | 1 - 4 choose task.");
     }
 	

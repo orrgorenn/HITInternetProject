@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.util.HashSet;
 import java.util.List;
 
 public class Solver implements IHandler {
@@ -40,22 +41,32 @@ public class Solver implements IHandler {
 	                break;
 	            }
 	        	case "2": {
-	        		Index source, destination;
+	        		Index src, dest;
 	        		int[][] m = (int[][]) input.readObject();
                     System.out.println("Task 2 - " + Client.getTasks()[1]);
                     this.matrix = new Matrix(m);
-                    source = (Index) input.readObject();
+                    src = (Index) input.readObject();
                     System.out.println("[Server] Received Source.");
-                    destination = (Index) input.readObject();
+                    dest = (Index) input.readObject();
                     System.out.println("[Server] Received Destination.");
-                    TraversableMatrix traversable22 = new TraversableMatrix(this.matrix);
-                    traversable22.setStartIndex(src);
-                    traversable22.setEndIndex(dest);
-                    ParallelBFS parallelBFS = new ParallelBFS();
-                    List<List<Index>> minPaths;
-                    minPaths = parallelBFS.findShortestPathsParallelBFS(traversable22,traversable22.getOrigin(),traversable22.getDestination());
-                    objectOutputStream.writeObject(minPaths);
-                    System.out.println("Task 2.2 finished\n");
+                    TMatrix travMatrix = new TMatrix(this.matrix);
+                    travMatrix.setStartIndex(src);
+                    travMatrix.setEndIndex(dest);
+                    ParallelBFS<Index> parallelBFS = new ParallelBFS<Index>();
+                    List<List<Node<Index>>> minPaths;
+                    minPaths = parallelBFS.findShortestPathsParallelBFS(travMatrix, travMatrix.getOrigin(), travMatrix.getDestination());
+                    output.writeObject(minPaths);
+                    System.out.println("[Server] Task 2 finished.");
+	        	}
+	        	case "3": {
+	        		int[][] matrix = (int[][]) input.readObject();
+	        		System.out.println("Task 3 - " + Client.getTasks()[2]);
+                    List<HashSet<Index>> listOfHashsets;
+                    ParallelDFS<Index> parallelDFS = new ParallelDFS<>();
+                    listOfHashsets = parallelDFS.findSCCs(matrix);
+                    int size = parallelDFS.battleshipCheck(listOfHashsets, matrix);
+                    output.writeObject(size);
+                    System.out.println("[Server] Task 3 finished.");
 	        	}
 	        	default: {
 	        		output.writeObject("Wrong option.");

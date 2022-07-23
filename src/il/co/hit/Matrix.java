@@ -53,33 +53,42 @@ public class Matrix implements Serializable {
 
 	public Collection<Index> getNeighbors(final Index index) {
 		Collection<Index> list = new ArrayList<>();
+		int data = -1;
 		try { // S
+			data = matrix[index.getRow() + 1][index.getColumn()];
 			list.add(new Index(index.getRow() + 1, index.getColumn()));
 		} catch (ArrayIndexOutOfBoundsException ignored) {}
 		try { // E
+			data = matrix[index.getRow()][index.getColumn() + 1];
 			list.add(new Index(index.getRow(), index.getColumn() + 1));
 		} catch (ArrayIndexOutOfBoundsException ignored) {}
 		try { // N
+			data = matrix[index.getRow() - 1][index.getColumn()];
 			list.add(new Index(index.getRow() - 1, index.getColumn()));
 		} catch (ArrayIndexOutOfBoundsException ignored) {}
 		try { // W
+			data = matrix[index.getRow()][index.getColumn() - 1];
 			list.add(new Index(index.getRow(), index.getColumn() - 1));
 		} catch (ArrayIndexOutOfBoundsException ignored) {}
 
 		try {
 			// NE
+			data = matrix[index.getRow() + 1][index.getColumn() + 1];
 			list.add(new Index(index.getRow() + 1, index.getColumn() + 1));
 		} catch (ArrayIndexOutOfBoundsException ignored) {}
 		try {
 			// NW
+			data = matrix[index.getRow() - 1][index.getColumn() - 1];
 			list.add(new Index(index.getRow() - 1, index.getColumn() - 1));
 		} catch (ArrayIndexOutOfBoundsException ignored) {}
 		try {
 			// SW
+			data = matrix[index.getRow() + 1][index.getColumn() - 1];
 			list.add(new Index(index.getRow() + 1, index.getColumn() - 1));
 		} catch (ArrayIndexOutOfBoundsException ignored) {}
 		try {
 			// SE
+			data = matrix[index.getRow() - 1][index.getColumn() + 1];
 			list.add(new Index(index.getRow() - 1, index.getColumn() + 1));
 		} catch (ArrayIndexOutOfBoundsException ignored) {}
 		return list;

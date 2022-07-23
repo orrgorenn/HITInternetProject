@@ -4,17 +4,22 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Index class represents a (row, column) location inside matrix
- * @author Orr.G & Or.S
+ * Index class represents a (row, column) location inside matrix and implements Serializable
+ * @author orr_g, or_s, anna_p
  *
  */
 public class Index implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int r, c;
 	
+	/**
+	 * Class constructor for an Index from row and col
+	 * @param r row
+	 * @param c column
+	 */
 	public Index(int r, int c) {
 		if(r < 0 || c < 0) {
-			throw new IllegalArgumentException("Row | Column cannot be negative.");
+			throw new ArrayIndexOutOfBoundsException("Row | Column cannot be negative. r: " + r + " | c: " + c);
 		}
 		this.r = r;
 		this.c = c;
