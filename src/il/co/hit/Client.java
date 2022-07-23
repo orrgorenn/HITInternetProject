@@ -2,6 +2,7 @@ package il.co.hit;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.net.Socket;
  * This is the client class.
  * The client class communicates with the server over TCP.
  * The client can choose total of 4 tasks.
- * @author orr.g & or.s
+ * @author orr_g, or_s, anna_p
  *
  */
 
@@ -113,17 +114,21 @@ public class Client {
     	System.out.println("The chosen task is: " + tasks[task - 1]);
     	output.writeObject(String.valueOf(task));
 		output.writeObject(allTasks[task - 1]);
+		Matrix matrix;
+		Index startIndex, endIndex;
 		
 		switch(task) {
-			case 1:
+			case 1: {
 				List<HashSet<Index>> answer = new ArrayList<>((List<HashSet<Index>>) input.readObject()) {};
 				System.out.println("Answer: \n" + answer);
-			case 2:
-				Matrix matrix = new Matrix(allTasks[task - 1]);
+				break;
+			}
+			case 2: {
+				matrix = new Matrix(allTasks[task - 1]);
 		        System.out.println("Choose starting index (r, c):");
-		        Index startIndex = getIndexFromInput(matrix);
+		        startIndex = getIndexFromInput(matrix);
 		        System.out.println("Choose destination index (r, c):");
-		        Index endIndex = getIndexFromInput(matrix); 
+		        endIndex = getIndexFromInput(matrix); 
 		        
 		        output.writeObject(startIndex);
 		        output.writeObject(endIndex);
@@ -132,10 +137,24 @@ public class Client {
 		        
 		        System.out.println("Answer: \n" + minPaths);
 		        break;
-			case 3:
+			}
+			case 3: {
 				int size = (int) input.readObject();
 		        System.out.println("Answer: \n" + size);
 		        break;
+			}
+			case 4: {
+				matrix = new Matrix(allTasks[task - 1]);
+				System.out.println("Choose starting index (r, c):");
+                startIndex = getIndexFromInput(matrix);
+                System.out.println("Choose destination index (r, c):");
+                endIndex = getIndexFromInput(matrix);
+                output.writeObject(startIndex);
+                output.writeObject(endIndex);
+                
+                LinkedList<List<Index>> minWeightList = new LinkedList<>((LinkedList<List<Index>>) input.readObject());
+                System.out.println("Answer: \n" + minWeightList);
+			}
 			default:
 				break;
 		}

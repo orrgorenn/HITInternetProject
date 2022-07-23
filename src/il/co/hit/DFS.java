@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  *
  * @param <T>
  */
-public class ParallelDFS<T> {
+public class DFS<T> {
 
     final ThreadLocal<Stack<Node<T>>> threadLocalStack = ThreadLocal.withInitial(() -> new Stack<Node<T>>());
     final ThreadLocal<Set<Node<T>>> threadLocalSet = ThreadLocal.withInitial(LinkedHashSet::new);
@@ -146,7 +146,7 @@ public class ParallelDFS<T> {
         listOfNodes = sourceMatrix.findOnes();
 
         // travMatrix.setStartIndex(travMatrix.getStartIndex());
-        ParallelDFS<Index> threadLocalDFSVisit = new ParallelDFS<>();
+        DFS<Index> threadLocalDFSVisit = new DFS<>();
         sccs = threadLocalDFSVisit.DFSTraverse(travMatrix, listOfNodes);
         List<HashSet<Index>> listOfAllSCCS = sccs.stream().sorted(Comparator.comparingInt(HashSet::size)).collect(Collectors.toList());
         return listOfAllSCCS;

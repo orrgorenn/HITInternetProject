@@ -8,13 +8,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * This class implement kind of BFS algorithm.
- * We need to find all the shortest paths between 2 nodes(from source to destination)
- * How?
- * (1)find all paths from source to destination - with findPaths method
- * (2)find all shortest paths by loop all over the paths and check size of the path- in findShortestPathsParallelBFS method - parallel
+ * BFS Algorithm
+ * @author orr_g, or_s, anna_p
+ *
+ * @param <T>
  */
-public class ParallelBFS<T> {
+public class BFS<T> {
     final ThreadLocal<LinkedList<List<Node<T>>>> threadLocalQueue = ThreadLocal.withInitial(() -> new LinkedList<List<Node<T>>>());
 
     public ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 10, 1000, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
