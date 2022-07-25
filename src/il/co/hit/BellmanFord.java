@@ -68,7 +68,9 @@ public class BellmanFord<T> {
     }
 
     /**
-     * findLightestPaths is a method to find lightest paths between srcNode and destNode
+     * findLightestPaths is a method to find lightest paths between srcNode and destNode using BellmanFord Algorithm
+     * BellmanFord can also work with negative numbers so it's more flexible than Dijkstra's algorithm.
+     * We find paths using the above method (findPaths) and calculate each path weight.
      *
      * @param graph
      * @param srcNode

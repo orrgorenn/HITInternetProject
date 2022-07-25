@@ -59,7 +59,8 @@ public class DFS<T> {
     }
 
     /**
-     * traverse - this function execute DFS method by ThreadLocal
+     * traverse - this function executes Depth First Search algorithm by ThreadLocal
+     * and handles a matrix as a graph
      * @param graph
      * @return List<T> connected component.
      */
@@ -85,7 +86,9 @@ public class DFS<T> {
     }
     
     /**
-     * Method to check of battleships
+     * Method to check squared shapes (containing 1) and assuring the fit with the definition
+     * of a battleship given in the task.
+     * If we break out of the square shape we decrease count of battleships.
      * @param sccs
      * @param matrix
      * @return number of battleships
@@ -101,7 +104,6 @@ public class DFS<T> {
                 continue;
             }
             for (Index index : singleSCC) {
-            	System.out.println(index);
                 if (index.getRow() <= minRow)
                     minRow = index.getRow();
                 if (index.getColumn() <= minCol)

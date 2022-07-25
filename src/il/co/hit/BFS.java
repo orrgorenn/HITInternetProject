@@ -50,7 +50,7 @@ public class BFS<T> {
     }
     
     /**
-     * The method finds the shortest paths in a parallel way
+     * The method finds the shortest paths in a parallel way comparing path sizes and containing each check in a callable.
      *
      * @param graph represent a graph
      * @param srcNode represent start index

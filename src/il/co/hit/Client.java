@@ -68,7 +68,7 @@ public class Client {
      */
     private static int[][] taskThreeMatrix = {
     		{1, 1, 0, 1, 1},
-    	    {0, 0, 0, 1, 1},
+    	    {0, 0, 1, 1, 1},
     	    {1, 1, 0, 1, 1},
     };
     
